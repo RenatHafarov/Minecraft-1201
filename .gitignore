@@ -1,0 +1,45 @@
+# Local secrets and machine-specific settings.
+server.properties
+*.env
+.env
+.env.*
+*.local
+
+# Minecraft world/runtime data. Keep only the tiny compatibility datapack.
+world/*
+!world/
+!world/datapacks/
+!world/datapacks/codex_fixes/
+!world/datapacks/codex_fixes/**
+
+# Logs, crashes, diagnostics, and generated caches.
+logs/
+crash-reports/
+debug/
+backups/
+modernfix/
+cache/
+tmp/
+*.log
+*.log.gz
+hs_err_pid*.log
+replay_pid*.log
+.codex-server-probe.*.log
+
+# Player/admin data that can contain usernames, UUIDs, IPs, or permissions.
+ops.json
+whitelist.json
+banned-ips.json
+banned-players.json
+usercache.json
+usernamecache.json
+
+# Temporary/editor files.
+*.tmp
+*.temp
+*.bak
+*.old
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
