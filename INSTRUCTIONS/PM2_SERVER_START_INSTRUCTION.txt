@@ -22,6 +22,19 @@
    cd /root/server
    chmod +x run.sh
 
+   Проверь, что Forge argfile существует:
+
+   test -f /root/server/libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt
+
+   Если команда ничего не пишет и возвращает exit code 0 - все нормально.
+   Если файла нет, сервер не стартанет. Нужно догрузить всю папку libraries/ из сборки
+   или выполнить Forge installer на VPS:
+
+   cd /root/server
+   java -jar forge-1.20.1-47.4.10-installer.jar --installServer
+
+   После installer снова проверь наличие unix_args.txt.
+
 3. Создать локальный server.properties
 
    Если server.properties еще нет:
@@ -50,6 +63,12 @@
 
    cd /root/server
    pm2 start ecosystem.config.cjs
+
+   Если до этого PM2 уже пытался запускать сервер и ушел в restart loop:
+
+   pm2 stop minecraft-forge
+   pm2 delete minecraft-forge
+   pm2 start ecosystem.config.cjs --only minecraft-forge
 
    Будут запущены два процесса:
 

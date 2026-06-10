@@ -1,0 +1,14 @@
+/chunky radius 1000
+/chunky center 0 0
+/chunky start
+
+/chunky world the_nether
+/chunky radius 1000
+/chunky start
+
+/chunky world the_end
+/chunky radius 1000
+/chunky start
+
+
+/chunky progress
