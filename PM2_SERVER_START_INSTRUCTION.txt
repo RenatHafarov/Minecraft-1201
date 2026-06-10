@@ -1,0 +1,103 @@
+Инструкция запуска сервера через PM2
+Путь на сервере: /root/server/
+
+1. Подготовить окружение
+
+   Нужны Java 17, Node.js и PM2.
+
+   Пример для Ubuntu/Debian:
+
+   apt update
+   apt install -y openjdk-17-jre-headless nodejs npm
+   npm install -g pm2
+
+2. Загрузить сборку
+
+   Положи содержимое репозитория в:
+
+   /root/server/
+
+   Затем:
+
+   cd /root/server
+   chmod +x run.sh
+
+3. Создать локальный server.properties
+
+   Если server.properties еще нет:
+
+   cp server.properties.example server.properties
+
+   Открой server.properties и проверь:
+
+   enable-rcon=true
+   rcon.port=25575
+   rcon.password=ТВОЙ_СЛОЖНЫЙ_ПАРОЛЬ
+   broadcast-rcon-to-ops=false
+
+   Важно: порт RCON 25575 не открывай наружу в firewall. Он нужен только локально для scheduler'а.
+
+4. Создать локальный файл с RCON-паролем
+
+   Пароль должен совпадать с rcon.password в server.properties.
+   Файл .rcon-password добавлен в .gitignore и не должен попадать в репозиторий.
+
+   cd /root/server
+   printf '%s' 'ТВОЙ_СЛОЖНЫЙ_ПАРОЛЬ' > .rcon-password
+   chmod 600 .rcon-password
+
+5. Запустить сервер и scheduler через PM2
+
+   cd /root/server
+   pm2 start ecosystem.config.cjs
+
+   Будут запущены два процесса:
+
+   minecraft-forge        - сам Forge-сервер
+   mc-restart-scheduler   - таймер рестарта через RCON
+
+6. Сохранить PM2-процессы после перезагрузки VPS
+
+   pm2 save
+   pm2 startup systemd
+
+   После команды pm2 startup systemd PM2 покажет еще одну команду с sudo/env PATH.
+   Ее нужно скопировать и выполнить один раз.
+
+7. Как работает автоперезапуск
+
+   Scheduler каждые 4 часа отправляет в чат всем игрокам цветные предупреждения:
+
+   за 10 минут
+   за 5 минут
+   за 1 минуту
+
+   Затем он выполняет:
+
+   tellraw @a ...
+   save-all flush
+   stop
+
+   После команды stop процесс Minecraft завершится, а PM2 автоматически поднимет его снова.
+
+8. Полезные команды PM2
+
+   pm2 status
+   pm2 logs minecraft-forge
+   pm2 logs mc-restart-scheduler
+   pm2 restart minecraft-forge
+   pm2 restart mc-restart-scheduler
+   pm2 stop minecraft-forge
+   pm2 stop mc-restart-scheduler
+
+9. Изменение интервала рестарта
+
+   По умолчанию стоит 4 часа.
+   Настройка находится в ecosystem.config.cjs:
+
+   RESTART_INTERVAL_HOURS: "4"
+
+   После изменения:
+
+   pm2 restart mc-restart-scheduler
+   pm2 save

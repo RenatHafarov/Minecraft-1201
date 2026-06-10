@@ -1,5 +1,6 @@
 # Local secrets and machine-specific settings.
 server.properties
+.rcon-password
 *.env
 .env
 .env.*
