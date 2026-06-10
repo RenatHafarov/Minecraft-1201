@@ -23,6 +23,7 @@ cache/
 tmp/
 *.log
 *.log.gz
+*.sparkprofile
 hs_err_pid*.log
 replay_pid*.log
 .codex-server-probe.*.log

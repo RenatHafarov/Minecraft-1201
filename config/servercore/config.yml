@@ -37,26 +37,26 @@ dynamic:
   # ► interval = The amount of seconds between each check to increase or decrease.
   dynamic-settings:
     - setting: 'CHUNK_TICK_DISTANCE'
-      max: 7
-      min: 4
+      max: 6
+      min: 3
       increment: 1
       interval: 15
 
     - setting: 'MOBCAP_PERCENTAGE'
-      max: 90
-      min: 50
+      max: 80
+      min: 45
       increment: 10
       interval: 15
 
     - setting: 'SIMULATION_DISTANCE'
-      max: 6
-      min: 4
+      max: 5
+      min: 3
       increment: 1
       interval: 15
 
     - setting: 'VIEW_DISTANCE'
-      max: 9
-      min: 6
+      max: 8
+      min: 5
       increment: 1
       interval: 150
 
@@ -106,16 +106,16 @@ mob-spawning:
   # ► spawn-interval = The interval between spawn attempts in ticks. Higher values mean less frequent spawn attempts.
   categories:
     - category: 'MONSTER'
-      mobcap: 70
-      spawn-interval: 1
+      mobcap: 60
+      spawn-interval: 2
 
     - category: 'CREATURE'
       mobcap: 10
       spawn-interval: 400
 
     - category: 'AMBIENT'
-      mobcap: 15
-      spawn-interval: 1
+      mobcap: 10
+      spawn-interval: 2
 
     - category: 'AXOLOTLS'
       mobcap: 5
@@ -130,8 +130,8 @@ mob-spawning:
       spawn-interval: 1
 
     - category: 'WATER_AMBIENT'
-      mobcap: 20
-      spawn-interval: 1
+      mobcap: 12
+      spawn-interval: 2
 
 
 # Settings for commands and their formatting.
@@ -156,16 +156,16 @@ commands:
 # Note: while this is a very powerful feature, it can still slow down mobfarms and break very specific technical contraptions.
 activation-range:
   # Enables activation range.
-  enabled: false
+  enabled: true
   # Briefly ticks entities newly added to the world for 10 seconds (includes both spawning and loading).
   # This gives them a chance to properly immunize when they are spawned if they should be. Can be helpful for mobfarms.
   tick-new-entities: true
   # Enables vertical range checks. By default, activation ranges only work horizontally.
   # This can greatly improve performance on taller worlds, but might break a few very specific ai-based mobfarms.
-  use-vertical-range: false
+  use-vertical-range: true
   # Skips 1/4th of entity ticks whilst not immune.
   # This affects entities that are within the activation range, but not immune (for example by falling or being in water).
-  skip-non-immune: false
+  skip-non-immune: true
   # Allows villagers to tick regardless of the activation range when panicking.
   villager-tick-panic: true
   # The time in seconds that a villager needs to be inactive for before obtaining work immunity (if it has work tasks).
