@@ -1,0 +1,41 @@
+# World Border
+
+enableCustomOverworldBorder = true
+enableCustomNetherBorder = true
+enableCustomEndBorder = true
+
+# Если true - игрок переносится на противоположную сторону мира.
+# Если false - отбрасывается назад.
+shouldLoopToOppositeBorder = false
+
+# На сколько блоков вернуть игрока внутрь мира.
+distanceTeleportedBack = 10
+
+nearBorderMessage = "Вы приближаетесь к границе мира!"
+hitBorderMessage = "Вы достигли границы мира!"
+loopBorderMessage = "Вы пересекли границу и переместились на другую сторону!"
+
+# ===== OVERWORLD =====
+
+overworldBorderPositiveX = 7500
+overworldBorderNegativeX = -7500
+
+overworldBorderPositiveZ = 7500
+overworldBorderNegativeZ = -7500
+
+# ===== NETHER =====
+# 7500 / 8 = 937
+
+netherBorderPositiveX = 937
+netherBorderNegativeX = -937
+
+netherBorderPositiveZ = 937
+netherBorderNegativeZ = -937
+
+# ===== END =====
+
+endBorderPositiveX = 7500
+endBorderNegativeX = -7500
+
+endBorderPositiveZ = 7500
+endBorderNegativeZ = -7500
